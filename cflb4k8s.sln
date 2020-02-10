@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngressAgent", "IngressAgent\IngressAgent.csproj", "{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer", "LoadBalancer\LoadBalancer.csproj", "{3465D5EE-C26D-426C-BF36-3F2FB25A3260}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3465D5EE-C26D-426C-BF36-3F2FB25A3260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3465D5EE-C26D-426C-BF36-3F2FB25A3260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3465D5EE-C26D-426C-BF36-3F2FB25A3260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3465D5EE-C26D-426C-BF36-3F2FB25A3260}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
