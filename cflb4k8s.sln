@@ -2,7 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngressAgent", "IngressAgent\IngressAgent.csproj", "{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer", "LoadBalancer\LoadBalancer.csproj", "{F20A4B71-C422-40DC-AA0F-77D648A6901E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer", "LoadBalancer\LoadBalancer.csproj", "{EBEE8A14-B4EF-4FAE-99D9-06044EF4C1EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigRemote", "ConfigRemote\ConfigRemote.csproj", "{70D3ACCD-F8EA-4F04-BA3F-CB0B994F85DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +16,13 @@ Global
 		{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDBEF432-0788-4F81-A409-8D12DEA3F4A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F20A4B71-C422-40DC-AA0F-77D648A6901E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F20A4B71-C422-40DC-AA0F-77D648A6901E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F20A4B71-C422-40DC-AA0F-77D648A6901E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F20A4B71-C422-40DC-AA0F-77D648A6901E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBEE8A14-B4EF-4FAE-99D9-06044EF4C1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBEE8A14-B4EF-4FAE-99D9-06044EF4C1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBEE8A14-B4EF-4FAE-99D9-06044EF4C1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBEE8A14-B4EF-4FAE-99D9-06044EF4C1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D3ACCD-F8EA-4F04-BA3F-CB0B994F85DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D3ACCD-F8EA-4F04-BA3F-CB0B994F85DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D3ACCD-F8EA-4F04-BA3F-CB0B994F85DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D3ACCD-F8EA-4F04-BA3F-CB0B994F85DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

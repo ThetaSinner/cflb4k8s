@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package cflb4k8s;
+
+service ConfigRemote {
+  rpc Status(StatusQuery) returns (StatusResponse) {}
+  
+  rpc PushRule(Rule) returns (RuleAck) {}
+  
+  rpc DropRule(RuleDrop) returns (RuleAck) {}
+}
+
+message Rule {
+  string host = 1;
+  
+  string target = 2;
+}
+
+message RuleAck {
+    bool accepted = 1;
+}
+
+message RuleDrop {
+    string host = 1;
+}
+
+message StatusQuery {
+    // none
+}
+
+message StatusResponse {
+    bool initialised = 1;
+}
