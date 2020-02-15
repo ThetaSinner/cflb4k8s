@@ -4,7 +4,23 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.IngressAgent
+    networks:
+      cflb:
   load-balancer:
     build:
       context: .
       dockerfile: Dockerfile.LoadBalancer
+    networks:
+      cflb:
+        aliases:
+          - mocka
+          - mockb
+  mock-web-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.MockWebApi
+    networks:
+      cflb:
+
+networks:
+  cflb:
