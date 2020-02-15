@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using Cflb4K8S;
 using Grpc.Core;
 
@@ -64,24 +63,27 @@ namespace LoadBalancer
             sslStream.WriteTimeout = 15000;
 
             var buffer = new byte[2048];
-            var messageData = new StringBuilder();
             var byteCount = -1;
+
+            var parser = new Parser();
 
             while (byteCount != 0)
             {
                 byteCount = sslStream.Read(buffer, 0, buffer.Length);
+                
+                // buffer.AsEnumerable().ToList().ForEach(b => Console.Write($"{b}, "));
+                
+                parser.Accept(buffer, byteCount);
 
-                Console.WriteLine($"Bytes read {byteCount}.");
-
-                var decoder = Encoding.UTF8.GetDecoder();
-                var chars = new char[decoder.GetCharCount(buffer, 0, byteCount)];
-                decoder.GetChars(buffer, 0, byteCount, chars, 0);
-                messageData.Append(chars);
-
-                Console.WriteLine(messageData.ToString());
+                if (parser.IsComplete) break;
             }
-
-            Console.WriteLine(messageData.ToString());
+            
+            if (parser.Headers.TryGetValue("Host", out var hostHeader))
+            {
+                var target = rules.GetTarget(hostHeader);
+                
+                Console.WriteLine($"Forward request to {target}");
+            }
 
             sslStream.Close();
 
