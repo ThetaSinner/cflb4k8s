@@ -27,7 +27,7 @@ namespace LoadBalancer
                 string headerValue;
                 (headerName, headerValue, offset) = ReadHeaderLine(bytes, parseBytes, offset);
                 
-                Headers.Add(headerName, headerValue);
+                Headers.Add(headerName, headerValue?.Trim());
             } while (headerName != "");
 
             if (offset == parseBytes)

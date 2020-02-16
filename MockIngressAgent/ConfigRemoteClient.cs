@@ -23,7 +23,7 @@ namespace MockIngressAgent
             }
             catch (RpcException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Status.Detail);
                 return null;
             }
         }

@@ -2,6 +2,7 @@
 using System.Threading;
 using Cflb4K8S;
 using Grpc.Core;
+using Microsoft.Extensions.Configuration;
 
 namespace MockIngressAgent
 {
@@ -9,7 +10,16 @@ namespace MockIngressAgent
     {
         private static void Main(string[] args)
         {
-            var channel = new Channel("127.0.0.1:3301", ChannelCredentials.Insecure);
+            var config = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
+
+            var targetConfig = config["LOAD_BALANCER_TARGET"];
+            var target = string.IsNullOrWhiteSpace(targetConfig) ? "127.0.0.1:3301" : targetConfig;
+            
+            Console.WriteLine($"Connecting to load balancer configuration server on [{target}]");
+            
+            var channel = new Channel(target, ChannelCredentials.Insecure);
             var client = new ConfigRemoteClient(new ConfigRemote.ConfigRemoteClient(channel));
 
             while (true)
@@ -22,11 +32,16 @@ namespace MockIngressAgent
                 }
                 else if (!statusResponse.Initialised)
                 {
-                    var ruleAck = client.PushRule("mocka", "https://mock-web-api:5001");
-
+                    var ruleAck = client.PushRule("mocka", "http://mock-web-api:5000");
                     if (ruleAck.Accepted)
                     {
                         Console.WriteLine("Created rule for 'mocka'");
+                    }
+                    
+                    ruleAck = client.PushRule("mockb", "http://mock-web-api:5000");
+                    if (ruleAck.Accepted)
+                    {
+                        Console.WriteLine("Created rule for 'mockb'");
                     }
                 }
                 

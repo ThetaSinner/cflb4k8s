@@ -1,0 +1,5 @@
+FROM alpine:latest
+
+RUN apk update && apk add curl
+
+ENTRYPOINT ["sh", "-c", "'sleep 30000'"]

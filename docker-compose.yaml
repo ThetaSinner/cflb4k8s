@@ -10,6 +10,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.LoadBalancer
+    expose:
+      - "3301"
+      - "80"
+    environment:
+      - ConfigServerHost=0.0.0.0
+      - ConfigServerPort=3301
+      - HttpBindHost=0.0.0.0
+      - HttpBindPort=80
+      - HttpsEnabled=false
     networks:
       cflb:
         aliases:
@@ -19,6 +28,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.MockWebApi
+    networks:
+      cflb:
+  mock-ingress-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.MockIngressAgent
+    environment:
+      - LOAD_BALANCER_TARGET=load-balancer:3301
+    networks:
+      cflb:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    entrypoint: "sh -c 'sleep 30000'"
     networks:
       cflb:
 

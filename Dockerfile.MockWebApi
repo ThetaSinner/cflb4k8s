@@ -8,6 +8,6 @@ RUN dotnet restore MockWebApi
 
 # copy everything else and build app
 COPY MockWebApi/. ./MockWebApi/
-WORKDIR /app/MockWebApi
 
+WORKDIR /app/MockWebApi
 ENTRYPOINT ["dotnet", "run", "--launch-profile", "MockWebApi", "-c", "Release", "MockWebApi.dll"]
