@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockWebApi", "MockWebApi\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockIngressAgent", "MockIngressAgent\MockIngressAgent.csproj", "{B95F328B-C620-4BEF-8A2B-668C6FFE2A9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer.Test", "LoadBalancer.Test\LoadBalancer.Test.csproj", "{1D15B745-3BD8-4F50-91EA-5C14FB1CDC65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{B95F328B-C620-4BEF-8A2B-668C6FFE2A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B95F328B-C620-4BEF-8A2B-668C6FFE2A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B95F328B-C620-4BEF-8A2B-668C6FFE2A9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D15B745-3BD8-4F50-91EA-5C14FB1CDC65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D15B745-3BD8-4F50-91EA-5C14FB1CDC65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D15B745-3BD8-4F50-91EA-5C14FB1CDC65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D15B745-3BD8-4F50-91EA-5C14FB1CDC65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

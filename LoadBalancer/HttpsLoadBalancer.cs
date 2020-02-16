@@ -61,26 +61,7 @@ namespace LoadBalancer
             sslStream.ReadTimeout = 15000;
             sslStream.WriteTimeout = 15000;
 
-            var buffer = new byte[2048];
-            var byteCount = -1;
-
-            var parser = new Parser();
-
-            while (byteCount != 0)
-            {
-                byteCount = sslStream.Read(buffer, 0, buffer.Length);
-                
-                parser.Accept(buffer, byteCount);
-
-                if (parser.IsComplete) break;
-            }
-            
-            if (parser.Headers.TryGetValue("Host", out var hostHeader))
-            {
-                var target = rules.GetTarget(hostHeader);
-                
-                Console.WriteLine($"Forward request to {target}");
-            }
+            StreamHandler.Handle(rules, stream);
 
             sslStream.Close();
 

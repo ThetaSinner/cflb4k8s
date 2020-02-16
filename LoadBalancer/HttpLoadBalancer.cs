@@ -36,33 +36,8 @@ namespace LoadBalancer
         private static void AcceptClient(TcpClient client, RoutingRules rules)
         {
             var stream = client.GetStream();
-            
-            var buffer = new byte[2048];
-            var byteCount = -1;
 
-            var parser = new Parser();
-
-            while (byteCount != 0)
-            {
-                byteCount = stream.Read(buffer, 0, buffer.Length);
-                
-                parser.Accept(buffer, byteCount);
-
-                if (parser.IsComplete) break;
-            }
-            
-            parser.Headers.ToList().ForEach(pair =>
-            {
-                Console.WriteLine(pair.Key);
-                Console.WriteLine(pair.Value);
-            });
-            
-            if (parser.Headers.TryGetValue("Host", out var hostHeader))
-            {
-                var target = rules.GetTarget(hostHeader);
-                
-                Console.WriteLine($"Forward request to {target}");
-            }
+            StreamHandler.Handle(rules, stream);
 
             stream.Close();
 
