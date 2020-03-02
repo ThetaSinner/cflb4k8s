@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
@@ -11,6 +12,74 @@ namespace LoadBalancer.Test
         {
         }
 
+        [Test]
+        public void Parser2StatusLine()
+        {
+            const string requestString = @"GET /hello.htm HTTP/1.1
+";
+
+            var request = Encoding.ASCII.GetBytes(requestString);
+
+            var parser = new Parser2();
+            const int chunkSize = 1;
+            for (var i = 0; i < request.Length / chunkSize; i++)
+            {
+                var requestPart = request.AsEnumerable().Skip(i * chunkSize).Take(chunkSize).ToArray();
+                parser.Accept(requestPart, requestPart.Length);
+            }
+            
+            Assert.AreEqual(requestString.Trim(), parser.StatusLine);
+        }
+        
+        [Test]
+        public void Parser2Headers()
+        {
+            const string requestString = @"GET /hello.htm HTTP/1.1
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+Host: www.tutorialspoint.com
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+Connection: Keep-Alive
+
+";
+
+            var request = Encoding.ASCII.GetBytes(requestString);
+
+            var parser = new Parser2();
+            const int chunkSize = 1;
+            for (var i = 0; i < request.Length / chunkSize; i++)
+            {
+                var requestPart = request.AsEnumerable().Skip(i * chunkSize).Take(chunkSize).ToArray();
+                parser.Accept(requestPart, requestPart.Length);
+            }
+            
+            Assert.AreEqual("GET /hello.htm HTTP/1.1", parser.StatusLine);
+            var parserHeaders = parser.Headers;
+            Assert.AreEqual(5, parserHeaders.Count);
+        }
+        
+        [Test]
+        public void SimpleGetRequest()
+        {
+            var request = Encoding.ASCII.GetBytes(@"GET /hello.htm HTTP/1.1
+User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+Host: www.tutorialspoint.com
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+Connection: Keep-Alive
+
+");
+
+            var parser = new Parser();
+            for (var i = 0; i < request.Length; i++)
+            {
+                var requestPart = request.AsEnumerable().Skip(i * 5).Take(5).ToArray();
+                parser.Accept(requestPart, requestPart.Length);
+            }
+            
+            Assert.True(parser.IsComplete);
+        }
+        
         [Test]
         public void ChunkedTransfer()
         {
