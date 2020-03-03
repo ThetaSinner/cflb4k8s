@@ -32,8 +32,11 @@ namespace MockIngressAgent
         {
             var rule = new Rule
             {
+                Name = "testrule",
                 Host = host,
-                Target = target
+                Port = 10010,
+                Protocol = "https",
+                Targets = { target }
             };
 
             var ruleAck = Client.PushRule(rule);
