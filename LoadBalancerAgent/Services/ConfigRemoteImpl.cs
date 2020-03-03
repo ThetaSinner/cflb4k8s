@@ -1,16 +1,19 @@
 using System.Threading.Tasks;
 using Cflb4K8S;
 using Grpc.Core;
+using LoadBalancerAgent.Nginx;
 
 namespace LoadBalancer
 {
     public class ConfigRemoteImpl : ConfigRemote.ConfigRemoteBase 
     {
-        private readonly RoutingRules _routingRules;
+        private readonly RoutingRules _routingRules = new RoutingRules();
+        
+        private readonly ConfigExporter _configExporter;
 
-        public ConfigRemoteImpl(RoutingRules routingRules)
+        public ConfigRemoteImpl(ConfigExporter configExporter)
         {
-            this._routingRules = routingRules;
+            _configExporter = configExporter;
         }
         
         public override Task<StatusResponse> Status(StatusQuery request, ServerCallContext context)
@@ -25,6 +28,8 @@ namespace LoadBalancer
         {
             _routingRules.AddRule(request.Name, request);
             
+            _configExporter.Export(_routingRules);
+            
             return Task.FromResult(new RuleAck
             {
                 Accepted = true
@@ -34,6 +39,8 @@ namespace LoadBalancer
         public override Task<RuleAck> DropRule(RuleDrop request, ServerCallContext context)
         {
             _routingRules.DropRule(request.Host);
+            
+            _configExporter.Export(_routingRules);
             
             return Task.FromResult(new RuleAck()
             {

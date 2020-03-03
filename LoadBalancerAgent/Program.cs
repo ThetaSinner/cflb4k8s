@@ -15,19 +15,6 @@ namespace LoadBalancerAgent
     {
         public static void Main(string[] args)
         {
-            var rules = new RoutingRules();
-            rules.AddRule("singer", new Rule
-            {
-                Host = "artfactory.evelyn.internal",
-                Name = "artifactory",
-                Port = 443,
-                Protocol = "https",
-                Targets = { "https://node1.evelyn.internal:30092", "https://node1.evelyn.internal:30092" }
-            });
-            var render = new ConfigRenderer().Render(rules.GetRenderData());
-            
-            Console.WriteLine(render);
-
             CreateHostBuilder(args).Build().Run();
         }
 
