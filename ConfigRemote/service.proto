@@ -11,9 +11,11 @@ service ConfigRemote {
 }
 
 message Rule {
-  string host = 1;
-  
-  string target = 2;
+  string name = 1;
+  string host = 2;
+  int32 port = 3;
+  repeated string targets = 4;
+  string protocol = 5;
 }
 
 message RuleAck {
