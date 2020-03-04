@@ -63,15 +63,17 @@ namespace IngressAgent
             {
                 rule.Http.Paths.ToList().ForEach(path =>
                 {
+                    var targetPort = LookupPort(path, item.Metadata.NamespaceProperty);
+                    
                     var addRule = new Rule
                     {
                         Name = item.Metadata.Name,
                         Host = rule.Host,
-                        Port = LookupPort(path, item.Metadata.NamespaceProperty),
+                        Port = 443,
                         Protocol = "https" // look up from annotation
                     };
                     
-                    addRule.Targets.AddRange(nodesInfo.NodeAddresses);
+                    addRule.Targets.AddRange(nodesInfo.NodeAddresses.Select(nodeAddress => $"{nodeAddress}:{targetPort}"));
 
                     try
                     {
