@@ -11,6 +11,10 @@ namespace LoadBalancerAgent.Nginx
         public ConfigRenderer()
         {
             const string template = @"
+events {
+  worker_connections  4096;
+}
+
 http {
 {{#rules}}
     upstream {{name}} {
