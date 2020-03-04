@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using LoadBalancer;
 using Microsoft.Extensions.Configuration;
@@ -14,8 +15,18 @@ namespace LoadBalancerAgent.Nginx
         public ConfigExporter(ConfigRenderer configRenderer, IConfiguration configuration)
         {
             _configRenderer = configRenderer;
+            
             _nginxConfigLocation = configuration.GetValue<string>("nginxConfigLocation");
+            if (_nginxConfigLocation == null)
+            {
+                throw new InvalidOperationException("Must configure setting [nginxConfigLocation]");
+            }
+
             _reloadCommand = configuration.GetValue<string>("reloadCommand");
+            if (_reloadCommand == null)
+            {
+                throw new InvalidOperationException("Must configure setting [reloadCommand]");
+            }
         }
         
         public void Export(RoutingRules routingRules)
